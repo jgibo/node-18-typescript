@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"lib": ["ES2023"],
+		"module": "NodeNext",
+		"target": "ES2022",
+		
+		"strict": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "NodeNext",
+		"allowImportingTsExtensions": true,
+	},
+	"ts-node": {
+		"transpileOnly": true,
+	}
+}
