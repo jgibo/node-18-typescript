@@ -1,4 +1,4 @@
-import { slowFetcher } from "./fetcher.ts";
+import { slowFetcher } from "./fetcher.js";
 
 export function greet(name: string) {
 	return `Hello ${name}!`;

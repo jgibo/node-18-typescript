@@ -2,18 +2,22 @@
   "name": "node-18-typescript",
   "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0 <19.0.0"
+  },
   "scripts": {
     "dev": "ts-node --esm src/index.ts",
-    "test": "NODE_NO_WARNINGS=1 ava"
+    "test": "NODE_NO_WARNINGS=1 NODE_ENV=test ava"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "ky": "^1.0.1",
     "radash": "^11.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.17.15",
     "ava": "^5.3.1",
-    "esmock": "^2.5.0",
+    "testdouble": "^3.18.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
@@ -23,7 +27,7 @@
     },
     "nodeArguments": [
       "--loader=ts-node/esm",
-      "--loader=esmock"
+      "--loader=testdouble"
     ]
   }
 }

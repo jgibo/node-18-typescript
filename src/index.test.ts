@@ -1,25 +1,23 @@
 import test from 'ava';
-import esmock from 'esmock'
-import { asyncGreet, greet } from "./index.ts";
+import * as td from "testdouble"
+import { asyncGreet, greet } from "./index.js";
 
-test('greet', t => {
+test.serial('greet', t => {
 	const name = "Bot"
 	t.is(greet(name), `Hello ${name}!`);
 });
 
-test('async greet', async t => {
+test.serial('async greet', async t => {
 	const name = "Bot"
 	t.is(await asyncGreet(name), `Hello ${name}!`);
 });
 
-test('async fetcher', async t => {
-	const mod = await esmock('./index.ts', {
-		// mock the import of ./fetcher that ./index does
-		'./fetcher.ts': {
-			slowFetcher: () => Promise.resolve({data: "mocked data"})
-		}
-	}) as typeof import('./index.ts');
+test.serial('async fetcher', async t => {
+	const fakeData = {data: "mocked data"}
+	const mod = await td.replaceEsm('./fetcher.js');
+	td.when(mod.slowFetcher()).thenResolve(fakeData);
 
-	const data = await mod.runSlowFetcher();
+	const { runSlowFetcher } = await import('./index.js');
+	const data = await runSlowFetcher();
 	t.deepEqual(data, {data: "mocked data"});
 });
